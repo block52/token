@@ -1,0 +1,25 @@
+{
+  "name": "block52",
+  "version": "1.0.0",
+  "description": "Offical ERC20 token for block52",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/block52/token.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/block52/token/issues"
+  },
+  "homepage": "https://github.com/block52/token#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0"
+  }
+}
