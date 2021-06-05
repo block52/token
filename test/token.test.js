@@ -26,17 +26,17 @@ contract("Token", (accounts) => {
       expect(name).to.be.equal("Block52");
 
       const decimals = new BN("18");
-      const expected = new BN("10000000").mul(new BN("10").pow(decimals));
+      const expected = new BN("52000000").mul(new BN("10").pow(decimals));
 
       const totalSupply = await token.totalSupply();
       expect(totalSupply).to.be.bignumber.equal(expected);
     });
 
-    it("should have holder count as 1", async () => {
-      const actual = await token.holderCount();
-      const expected = new BN("1");
+    // it("should have holder count as 1", async () => {
+    //   const actual = await token.holderCount();
+    //   const expected = new BN("1");
 
-      expect(actual).to.be.bignumber.equal(expected);
-    });
+    //   expect(actual).to.be.bignumber.equal(expected);
+    // });
   });
 });
