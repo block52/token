@@ -15,7 +15,7 @@ module.exports = {
           providerOrUrl: process.env.NODE
         })
       },
-      network_id: "42",
+      network_id: 42,
       gas: 4500000,
       confirmations: 2,
       timeoutBlocks: 200,
@@ -25,7 +25,22 @@ module.exports = {
       host: "localhost", // Localhost (default: none)
       port: 8545, // Standard Ethereum port (default: none)
       network_id: "*" // Any network (default: none)
-    }
+    },
+    mainnet: {
+      provider: () => {
+        return new HDWalletProvider({
+          mnemonic: {
+            phrase: process.env.MAIN_MNEMONIC
+          },
+          providerOrUrl: process.env.MAIN_NODE
+        })
+      },
+      network_id: 1,
+      gasPrice: 6000000000, // 6 gwei,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: false,
+    },
   },
 
   // Set default mocha options here, use special reporters etc.
