@@ -1,5 +1,5 @@
 const Token = artifacts.require("Token");
-const Sale = artifacts.require("Sale");
+const ETHSwap = artifacts.require("ETHSwap");
 
 const {
   BN,
@@ -11,7 +11,7 @@ const {
 
 const { expect } = require("chai");
 
-contract("Sale", (accounts) => {
+contract("ETHSwap", (accounts) => {
   let token;
   let sale;
 
@@ -22,8 +22,9 @@ contract("Sale", (accounts) => {
     sale = await Sale.new(instance.address, "0x9326BFA02ADD2366b30bacB125260Af641031331");
   });
 
-  describe("deployment", () => {
+  describe("swaps", () => {
     it("should get standard ERC20 properties", async () => {
 
+    });
   });
 });

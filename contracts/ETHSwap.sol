@@ -4,7 +4,7 @@ pragma solidity =0.8.6;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract Sale {
+contract ETHSwap {
     uint256 private immutable _deployed;
     address private immutable _token;
 
@@ -17,7 +17,7 @@ contract Sale {
         ETH_USD = AggregatorV3Interface(eth_usd);
     }
 
-    function buy() external payable {
+    function swap() external payable {
         require(msg.value > 0, "Need to send more ETH");
         IERC20 token = IERC20(_token);
 
