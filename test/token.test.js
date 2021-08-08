@@ -1,5 +1,4 @@
 const Token = artifacts.require("Token");
-const Sale = artifacts.require("Sale");
 
 const {
   BN,
@@ -13,13 +12,10 @@ const { expect } = require("chai");
 
 contract("Token", (accounts) => {
   let token;
-  let sale;
 
   beforeEach(async () => {
-    token = await Token.new();
-    const instance = await token.deployed();
-    console.log(instance.address);
-    sale = await Sale.new(instance.address, "0x9326BFA02ADD2366b30bacB125260Af641031331");
+    token = await Token.new(accounts[0]);
+    console.log(token.address);
   });
 
   describe("deployment", () => {

@@ -1,12 +1,15 @@
 const Token = artifacts.require("Token");
-const Sale = artifacts.require("Sale");
+const ETHSwap = artifacts.require("ETHSwap");
 
 module.exports = async (deployer, network, accounts) => {
   console.log(accounts[0]);
   console.log(network);
 
+  let token;
+
   if (network == "development") {
     await deployer.deploy(Token, accounts[0]);
+    token = await Token.deployed();
     await token.transferOwnership(accounts[0]);
   }
 
@@ -17,7 +20,7 @@ module.exports = async (deployer, network, accounts) => {
     console.log(Token.address);
   
     // Transfer ownership to safe
-    const token = await Token.deployed();
+    token = await Token.deployed();
     console.log(token.address);
     await token.transferOwnership("0x9572E2a1DF6CE89a632dA4d29d6b48453F505e85"); 
   }
@@ -25,15 +28,14 @@ module.exports = async (deployer, network, accounts) => {
   if (network == "kovan") {
     const Metamask = "0xC29082511fEBc2185986d341ee8be3c9B2c66b66";
     await deployer.deploy(Token, Metamask);
-    const token = await Token.deployed();
+    token = await Token.deployed();
     console.log(token.address);
 
     await token.transferOwnership(Metamask);
     const ETH_USD = "0x9326BFA02ADD2366b30bacB125260Af641031331";
-    await deployer.deploy(Sale, token.address, ETH_USD);
+    await deployer.deploy(ETHSwap, token.address, ETH_USD);
   }
 
-  
   
   // ETH_USD main net 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
 };

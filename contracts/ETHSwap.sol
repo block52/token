@@ -24,6 +24,24 @@ contract ETHSwap {
         uint256 amount = msg.value;
         (, int256 ethPrice, , , ) = ETH_USD.latestRoundData();
         uint256 usd_amount = amount / uint256(ethPrice);
+
+        require(token.balanceOf(address(this)) > usd_amount, "Not enough tokens");
+        token.transferFrom(address(this), msg.sender, usd_amount);
+
+        emit Swapped(msg.sender, usd_amount);
+    }
+
+    function quote() external view returns (int256) {
+        (, int256 ethPrice, , , ) = ETH_USD.latestRoundData();
+        return ethPrice;
+    }
+
+    receive() external payable {
+        IERC20 token = IERC20(_token);
+
+        uint256 amount = msg.value;
+        (, int256 ethPrice, , , ) = ETH_USD.latestRoundData();
+        uint256 usd_amount = amount / uint256(ethPrice);
         require(
             token.balanceOf(address(this)) > usd_amount,
             "Not enough tokens"
@@ -31,8 +49,5 @@ contract ETHSwap {
         token.transferFrom(address(this), msg.sender, usd_amount);
     }
 
-    function quote() external view returns (int256) {
-        (, int256 ethPrice, , , ) = ETH_USD.latestRoundData();
-        return ethPrice;
-    }
+    event Swapped(address indexed from, uint256 amount);
 }
